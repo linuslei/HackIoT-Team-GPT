@@ -22,14 +22,6 @@ else:
 
 """
 
-pir_sensor_pin = 11
-motion_detected = read_pir_sensor(pir_sensor_pin)
-
-if motion_detected:
-    print("Motion detected!")
-else:
-    print("No motion detected.")
-
 def read_pir_sensor(pir_sensor_pin):
     GPIO.setmode(GPIO.BOARD)
 
