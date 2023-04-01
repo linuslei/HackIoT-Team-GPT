@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import time
+import tkinter as tk
 
 #Create an instance of the MQTT client and set up the connection to the MQTT broker
 client = mqtt.Client()
@@ -25,7 +26,30 @@ client.subscribe(topic)
 client.subscribe(topic2)
 client.subscribe(topic3)
 
-#Loop to keep the program running
+#Create a Tkinter window
+root = tk.Tk()
+root.title("Crash Detection System")
+
+#Create a label to display the received message
+message_label = tk.Label(root, text="")
+message_label.pack()
+
+#Display the confidence and severity scores on a website and provide a button to report the crash.
+def display():
+    message_label.config(text="Confidence:" + str(confidence) + " Severity:" + str(severity))
+    button = tk.Button(root, text="Report", command=report)
+    button.pack()
+
+#Report the crash to the emergency services
+def report():
+    print("Reported")
+
+#Loop to keep the program runnings
 while True:
     client.loop()
+    root.update()
     time.sleep(1)
+    if confidence > 0.5:
+        display()
+
+
