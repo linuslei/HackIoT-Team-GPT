@@ -1,10 +1,8 @@
 Crash Detect for Bike Share
 
 -Input
- -Accelerometer
-  -For detecting possible crash or fall
- -Heart Sensor
-  -For detecting whether a person is onboard
+ Accelerometer: detecting possible crash or fall
+ Motion Sensor: detecting whether a person is onboard
  -GPS Sensor
   -For sending out location
  -Microphone Sensor
