@@ -7,20 +7,46 @@
 import RPi.GPIO as GPIO
 import time
 
-GPIO.setmode(GPIO.BOARD)
+"""
+to call thie function, use the following code:
 
-# Set up PIR sensor input pin
+from pir_sensor import read_pir_sensor
+
 pir_sensor_pin = 11
-GPIO.setup(pir_sensor_pin, GPIO.IN)
+motion_detected = read_pir_sensor(pir_sensor_pin)
 
-print("PIR sensor warming up...")
-time.sleep(10)  # allow sensor to warm up
+if motion_detected:
+    print("Motion detected!")
+else:
+    print("No motion detected.")
 
-print("PIR sensor ready")
-try:
-    while True:
-        if GPIO.input(pir_sensor_pin):
-            print("Motion detected!")
-        time.sleep(0.5)  # wait for half a second before checking again
-except KeyboardInterrupt:
-    GPIO.cleanup()
+"""
+
+pir_sensor_pin = 11
+motion_detected = read_pir_sensor(pir_sensor_pin)
+
+if motion_detected:
+    print("Motion detected!")
+else:
+    print("No motion detected.")
+
+def read_pir_sensor(pir_sensor_pin):
+    GPIO.setmode(GPIO.BOARD)
+
+    # Set up PIR sensor input pin
+    GPIO.setup(pir_sensor_pin, GPIO.IN)
+
+    print("PIR sensor warming up...")
+    time.sleep(10)  # allow sensor to warm up
+
+    print("PIR sensor ready")
+    try:
+        while True:
+            if GPIO.input(pir_sensor_pin):
+                return True  # motion detected!
+            time.sleep(0.5)  # wait for half a second before checking again
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+
+
+
