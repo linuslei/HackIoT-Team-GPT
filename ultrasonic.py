@@ -23,7 +23,7 @@ def distance():
         Stop_time = time.time()
  
     # time difference between start and arrival
-    Duration = Stop - Start
+    Duration = Stop_time - Start_time
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance = Duration * 17150
