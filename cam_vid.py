@@ -26,6 +26,7 @@ if __name__ == '__main__':
        start_recording()
        crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
        if crash_flag:
+           picam2.stop_recording()
            chunk_size = 1024 * 1024  # 1 MB
            with open('footage.mp4', 'rb') as f:
                chunks = iter(lambda: f.read(chunk_size), b'')
