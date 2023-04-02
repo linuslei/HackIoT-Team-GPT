@@ -52,14 +52,6 @@ def detect_crash(accel_thres, sound_thres):
         crash_flag = 0
 
     # Publish the crash flag value to the MQTT broker
-    publish.single("crash_detect/crash_flag", crash_flag, hostname="test.mosquitto.org")
+    ##publish.single("crash_detect/crash_flag", crash_flag, hostname="test.mosquitto.org")
 
     return crash_flag, abs_accel, sound
-
-##For testing
-while True:
-    crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
-    print("Crash Flag:" + crash_flag)
-    print("Aceleration:"+ accel)
-    print("Sound" + sound)
-    time.sleep(0.1)
