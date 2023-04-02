@@ -23,17 +23,17 @@ if __name__ == '__main__':
     client.loop_start()
     time.sleep(1)
     while True:
-        start_recording()
-        crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
-        if crash_flag:
-            chunk_size = 1024 * 1024  # 1 MB
-            with open('footage.mp4', 'rb') as f:
-                chunks = iter(lambda: f.read(chunk_size), b'')
-                for i, chunk in enumerate(chunks):
-                    chunk_base64 = base64.b64encode(chunk)
-                    topic = 'crash_footage'
-                    payload = {
-                        'chunk_number': i,
-                        'chunk_data': chunk_base64.decode('utf-8')
-                    }
-                    client.publish(topic, str(payload))
+       start_recording()
+       crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
+       if crash_flag:
+           chunk_size = 1024 * 1024  # 1 MB
+           with open('footage.mp4', 'rb') as f:
+               chunks = iter(lambda: f.read(chunk_size), b'')
+               for i, chunk in enumerate(chunks):
+                   chunk_base64 = base64.b64encode(chunk)
+                   topic = 'crash_footage'
+                   payload = {
+                       'chunk_number': i,
+                       'chunk_data': chunk_base64.decode('utf-8')
+                   }
+                   client.publish(topic, str(payload))
