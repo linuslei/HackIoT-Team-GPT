@@ -25,6 +25,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
     # subscribe to topics of interest here
+    message.payload = message.payload.decode("utf-8")
     print(f"Received message: {message.payload.decode()} on topic {message.topic}")
 
 
