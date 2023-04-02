@@ -4,8 +4,6 @@ Crash Detect for Bike Share
  
 Accelerometer: detecting possible crash or fall by speed
 
-Motion Sensor: detecting whether a person is onboard
-
 Microphone Sensor: detecting crash sound
 
 -Definition
