@@ -58,8 +58,3 @@ while True:
     print("Aceleration:"+ accel)
     print("Sound" + sound)
     time.sleep(0.1)
-
-
-
-
-
