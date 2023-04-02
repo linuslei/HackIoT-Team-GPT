@@ -9,7 +9,6 @@ import adafruit_mpu6050
 import RPi.GPIO as GPIO
 import Adafruit_MCP3008
 import numpy as np
-from Body_Detect import read_pir_sensor
 
 
 #Use MPU6050 to detect crash
@@ -60,12 +59,7 @@ def detect_crash(accel_thres, sound_thres):
 ##For testing
 while True:
     crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
-    print(crash_flag)
-    print(accel)
-    print(sound)
+    print("Crash Flag:" + crash_flag)
+    print("Aceleration:"+ accel)
+    print("Sound" + sound)
     time.sleep(0.1)
-
-
-
-
-
