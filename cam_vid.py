@@ -25,6 +25,9 @@ if __name__ == '__main__':
     while True:
        start_recording()
        crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
+       print ("Crash flag: " + str(crash_flag))
+	   print ("acceleration: " + str(accel))
+	   print ("sound: " + str(sound))
        if crash_flag:
            picam2.stop_recording()
            print("the recording has stopped")
