@@ -1,4 +1,5 @@
 #Detect Crash
+import paho.mqtt.publish as publish
 
 #Notice: Wiring CLK = 11 MISO = 9 MOSI = 10 CS = 8
 import time
@@ -50,6 +51,10 @@ def detect_crash(accel_thres, sound_thres):
         crash_flag = 1
     else:
         crash_flag = 0
+
+    # Publish the crash flag value to the MQTT broker
+    publish.single("crash_detect/crash_flag", crash_flag, hostname="test.mosquitto.org")
+
     return crash_flag, abs_accel, sound
 
 ##For testing
