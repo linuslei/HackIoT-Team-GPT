@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 import paho.mqtt.client as mqtt
 import base64
-import Crash_Detect
+from Crash_Detect import detect_crash
 
 # Create an instance of the Flask class
 app = Flask(__name__)
