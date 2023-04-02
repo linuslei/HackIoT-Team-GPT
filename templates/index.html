@@ -2,22 +2,48 @@
 <html>
   <head>
     <title>Crash Detect</title>
+    <style>
+      /* Center the table on the page */
+      table {
+        margin: auto;
+      }
+      
+      /* Add some basic styling to the table */
+      th, td {
+        padding: 10px;
+        border: 1px solid black;
+      }
+      
+      th {
+        background-color: lightgray;
+      }
+    </style>
   </head>
   <body>
-    <h1>Crash Detect</h1>
+    <h1 style="text-align: center;">Crash Detect</h1>
     <table>
       <tr>
         <th>Accelerometer</th>
         <th>Microphone Sensor</th>
         <th>Motion Sensor</th>
         <th>Camera Sensor</th>
+        <th>Distance Sensor</th>
       </tr>
       <tr>
         <td>{{ accelerometer }}</td>
         <td>{{ sound }}</td>
         <td>{{ motion }}</td>
         <td>{{ vision }}</td>
+        <td>{{ distance }}</td>
       </tr>
     </table>
+    <h2>Last Received Message</h2>
+    <ul>
+      <li>Accelerometer: {{ accelerometer_message }}</li>
+      <li>Microphone Sensor: {{ sound_message }}</li>
+      <li>Motion Sensor: {{ motion_message }}</li>
+      <li>Camera Sensor: {{ vision_message }}</li>
+      <li>Distance Sensor: {{ distance_message }}</li>
+    </ul>
   </body>
 </html>
