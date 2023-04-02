@@ -46,12 +46,19 @@ def detect_crash(accel_thres, sound_thres):
     accel_x,accel_y,accel_z = read_accel()
     sound = read_sound()
     abs_accel = np.sqrt(accel_x**2 + accel_y**2 + accel_z**2)
-    if abs_accel > accel_thres or sound > sound_thres:
+    if abs_accel > accel_thres and sound > sound_thres:
         crash_flag = 1
     else:
         crash_flag = 0
     return crash_flag, abs_accel, sound
 
+##For testing
+while True:
+    crash_flag, accel, sound = detect_crash(accel_thres = 0.2, sound_thres = 200)
+    print(crash_flag)
+    print(accel)
+    print(sound)
+    time.sleep(0.1)
 
 
 
