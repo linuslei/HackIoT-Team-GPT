@@ -37,5 +37,12 @@
         <td>{{ distance }}</td>
       </tr>
     </table>
+    {% if button %}
+    <tr>
+      <td colspan="5">
+        <button onclick="alert('You have 10 seconds to confirm you are okay!')">Are you okay?</button>
+      </td>
+    </tr>
+    {% endif %}
   </body>
 </html>

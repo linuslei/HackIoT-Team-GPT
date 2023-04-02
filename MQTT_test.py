@@ -12,6 +12,7 @@ sound = "crash_detect/microphone_sensor"
 motion = "crash_detect/motion_sensor"
 vision = "crash_detect/camera_sensor"
 distance = "crash_detect/distance_sensor"
+crash_flag = "crash_detect/crash_flag"
 
 def on_connect(client, userdata, flags, rc):
     print("Connected to server (i.e., broker) with result code "+str(rc))
@@ -24,15 +25,13 @@ def on_message(client, userdata, message):
     client.subscribe("crash_detect/motion_sensor")
     client.subscribe("crash_detect/camera_sensor")
     client.subscribe("crash_detect/distance_sensor")
-    client.message_callback_add("crash_detect/accelerometer", accelerometer_callback)
+    client.subscribe("crash_detect/crash_flag")
+    client.message_callback_add("crash_detect/crash_flag", crash_callback)
 
-def accelerometer_callback(client, userdata, message):
-    # Decode the message payload
-    payload = message.payload.decode("utf-8")
-    # Set the state of the sensor
-    accelerometer_state = payload
-    # change only the state of the accelerometer in the web page
-    return render_template('index.html', accelerometer=accelerometer_state)
+def crash_callback(client, userdata, message):
+    if message.payload.decode() == 1:
+        #if crash detected, add a button on the web page as an indicator
+        return render_template('index.html', button=True)
 
 # Define a route for the index page
 @app.route('/')
@@ -44,7 +43,7 @@ def index():
     vision_state = "Unknown"
     distance_state = "Unknown"
     # Set the initial message for the sensors
-    return render_template('index.html', accelerometer=accelerometer_state, sound=sound_state, motion=motion_state, vision=vision_state, distance=distance_state)
+    return render_template('index.html', accelerometer=accelerometer_state, sound=sound_state, motion=motion_state, vision=vision_state, distance=distance_state, button=False)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
