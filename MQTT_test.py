@@ -53,4 +53,5 @@ if __name__ == '__main__':
     client.connect("test.mosquitto.org", 1883, 60)
     # Start the MQTT client loop
     client.loop_start()
-    app.run(host='192.168.64.6', port=5000)
+    #app.run(host='192.168.64.6', port=5000)
+    app.run(host='0.0.0.0', port=5000)
