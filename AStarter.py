@@ -1,9 +1,10 @@
-
+from ultrasonic import distance
 from Crash_Detect import detect_crash
 from cam_vid import start_recording
-from ultrasonic import distance
 import time
 import paho.mqtt.client as mqtt
+import subprocess
+import sys
 
 BROKER = 'test.mosquitto.org'
 PORT = 1883
@@ -14,20 +15,32 @@ print(f"Connected to MQTT broker: {BROKER}")
 
 crash_flag = 0
 btn = 0
+t = 0
+
+
 
 while True:
-    crash_flag, accel, sound = detect_crash(1, 200)
+    crash_flag, accel, sound = detect_crash(1.1, 200)
+    diff_distance = distance()
+    print("accel: " + str(accel))
     if crash_flag == 1:
         start_recording()
+        confidence = accel / 1+ sound / 200+ diff_distance / 20
+        severity = accel*5 + sound/150
         print("Crash detected! Are you OK?")
-        btn = input("Press 1 to confirm that you're OK")
-        while t != 15 and btn != 1:
+        print("Press 1 to confirm that you're OK")
+        btn = input()
+        if btn == 1:
+            print("Thank you for confirming that you're OK")
+        while t < 15 and btn != 1:
             t = t + 1
             print("You have " + str(15 - t) + " seconds to confirm that you're OK")
             time.sleep(1)
         if btn != 1:
             print("We have called 911 for you.")
-            client.publish("crash_detect/crash_flag", "Crash Happened to User")  
+            client.publish("crash_detect/crash_flag", "Crash detected!")
+            client.publish("crash_detect/scores", "Confidence: " + str(confidence)+ " Severity: " + str(severity))
+    time.sleep(0.1)
 
 
 

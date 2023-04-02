@@ -9,11 +9,6 @@ PORT = 1883
 TOPIC = 'mqtt/test'
 
 # Define the MQTT topics to be used
-accelerometer = "crash_detect/accelerometer"
-sound = "crash_detect/microphone_sensor"
-motion = "crash_detect/motion_sensor"
-vision = "crash_detect/camera_sensor"
-distance = "crash_detect/distance_sensor"
 crash_flag = "crash_detect/crash_flag"
 
 
@@ -25,8 +20,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, message):
     # subscribe to topics of interest here
-    message.payload = message.payload.decode("utf-8")
-    print(f"Received message: {message.payload.decode()} on topic {message.topic}")
+    print(f"Received message: {message.payload.decode()}")
 
 
 def crash_callback(client, userdata, message):
@@ -42,11 +36,7 @@ if __name__ == '__main__':
     client.on_message = on_message
     client.connect(BROKER, PORT)
     client.subscribe("crash_detect/crash_flag")
-    client.subscribe("crash_detect/accelerometer")
-    client.subscribe("crash_detect/microphone_sensor")
-    client.subscribe("crash_detect/motion_sensor")
-    client.subscribe("crash_detect/camera_sensor")
-    client.subscribe("crash_detect/distance_sensor")
+    client.subscribe("crash_detect/scores")
     
 
 try:
