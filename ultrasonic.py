@@ -22,3 +22,9 @@ def distance():
  
     return distance
  
+def dist_diff():
+    dist_pre = distance()
+    sleep(0.5)
+    dist_curr = distance()
+    dist_diff = dist_curr-dist_pre()
+    return dist_diff
